@@ -5,7 +5,7 @@
 ````
 vagrant init
 ````
-2. Second, we need the provision file with the scrip inside it, so let's create the file by running `nano provision.sh`. This opens the nano editor and let's you put the script. The sript we want is the one to run gninx, as follows:
+2. Second, we need the provision file with the script inside it, so let's create the file by running `nano provision.sh`. This opens the nano editor and let's you put the script. The script we want is the one to run nginx, as follows:
 
 ````
 #!/bin/bash
