@@ -1,4 +1,4 @@
-# Vagrant Shell
+# Vagrant Shell - nginx script
 
 **To provision your Vagrant VM to run nginx automatically by running a bash script on 'vagrant up', you can follow these steps:**
 
@@ -76,7 +76,31 @@ If there are no blockers, you should see this message:
 
 ![2023-04-18](https://user-images.githubusercontent.com/129942042/232794056-1afcf9a6-b2da-48bd-8a3a-761e1cf5370b.png)
 
-9. To check if the app is running, grab the ip address from the Vagrantfile and add `:3000` at the end. Then put that on your browser, and if everything is ok, this is what it look like:
+9. To check if the app is running, grab the ip address from the Vagrantfile and add `:3000` at the end. Then put that on your browser and navigate, and if everything is ok, this is what it looks like:
 
 ![2023-04-18 (1)](https://user-images.githubusercontent.com/129942042/232802168-34f3481c-7cd3-4c41-8353-275acd1ae533.png)
+
+# Provision - Nodejs and pm2 script
+
+**I want to add the nodejs and pm2 installation scrip to my `provision.sh` file, so that when I `vagrant up`, it will get installed automatically. Let's look at the steps to achieve this:**
+
+1. On the Bash terminal, press CTRL + S lo leave the Linux environment and get back to the main user at your local machine
+
+2. `cd` into where you located your provision.sh file
+
+3. Run `nano provision.sh` to open the nano editor and edit the file
+
+4. Now add the following lines of code to your script:
+````
+sudo apt-get install python-software-properties -y
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install nodejs -
+sudo npm install pm2 -g
+npm install
+node app.js
+````
+, then CTRL + S to save and CTRL + X to exit.
+
+5. If you do `cat provision.sh`, it should look like this:
+
 
