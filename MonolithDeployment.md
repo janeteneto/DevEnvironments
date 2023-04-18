@@ -75,3 +75,8 @@ end
 If there are no blockers, you should see this message:
 
 ![2023-04-18](https://user-images.githubusercontent.com/129942042/232794056-1afcf9a6-b2da-48bd-8a3a-761e1cf5370b.png)
+
+9. To check if the app is running, grab the ip address from the Vagrantfile and add `:3000` at the end. Then put that on your browser, and if everything is ok, this is what it look like:
+
+![2023-04-18 (1)](https://user-images.githubusercontent.com/129942042/232802168-34f3481c-7cd3-4c41-8353-275acd1ae533.png)
+
