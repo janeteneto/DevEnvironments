@@ -94,8 +94,9 @@ If there are no blockers, you should see this message:
 ````
 sudo apt-get install python-software-properties -y
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install nodejs -
+sudo apt-get install nodejs -y
 sudo npm install pm2 -g
+cd app
 npm install
 node app.js
 ````
@@ -103,4 +104,9 @@ node app.js
 
 5. If you do `cat provision.sh`, it should look like this:
 
+![2023-04-18 (3)](https://user-images.githubusercontent.com/129942042/232824373-7b34695e-dc40-4f01-95b6-15ecb766e231.png)
+
+6. Now all that is left, is to check it: Run `vagrant up`, then `vagrant ssh`.
+
+7. Then, grab that ip address the same way as before and check is the app is working!
 
