@@ -6,7 +6,7 @@ The simplest way of doing this is to add a **`&`** at the end of the command:
 
 1. On your `provision.sh` file, change the version of node to version 7.x
 
-2. Now, as usual do
+2. Now, on your Bash terminal, as usual, do:
 ````
 vagrant up app
 ````
@@ -17,7 +17,7 @@ vagrant ssh app
 ````
 4. Now `cd` into the app file
 
-5. Run 
+5. Run this command to run the app in the background:
 ````
 node app.js &
 ````
@@ -29,7 +29,7 @@ node app.js &
 
 1. Repeat all the steps of the other method from 1 to 4
 
-2. Run command:
+2. Run this command to start the pm2 process:
 ````
 pm2 start app.js
 ````
