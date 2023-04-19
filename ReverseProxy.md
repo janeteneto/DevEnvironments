@@ -49,9 +49,9 @@ server {
 
 7. Press CTRL + S to save the file and CTRL +  to exit nano
 
-8. Run this command to reload nginx:
+8. Run this command to restart nginx:
 ````
-sudo systemctl reload nginx
+sudo service nginx restart
 ````
 
 9. Now copy the first ip address from the script and paste it into your browser to check if it worked. You should see the same Sparta App welcoming page as before.
