@@ -112,11 +112,11 @@ node app.js
 
 ## MongoDB Provisioning
 
-**Here are the steps to provision the installion of MongoDB on our db virtual machine::
+**Here are the steps to provision the installation of MongoDB on our db virtual machine:**
 
 - Make sure to `vagrant destroy db` before doing this.
 
-1. Create a new file named on the same directory called
+1. Create a new file on the same directory as the previous provision file called:
 ````
 provision_db.sh
 ````
@@ -148,4 +148,4 @@ vagrant ssh
 sudo systemctl status mongod
 ````
 
-And if the script was properly done, MongoDB is active and running.
+And if the script was properly done, MongoDB shows as active and running.
