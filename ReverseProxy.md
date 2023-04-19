@@ -24,19 +24,34 @@
 sudo unlink /etc/nginx/sites-enabled/default
 ````
 
-4. The next step is to run command:
+4. The next step is to run this command so that we can cd into this directory:
 ````
 cd etc/nginx/sites-available/
 ````
-, to cd into this directory
 
 5. Run command `nano reverse-proxy.conf` to create a .conf file and open nano editor
 
 6. Now, copy the following script:
 ````
-  listen 80;
-  location / {
-      proxy_pass http://192.168.10.100:3000/;
-     }
-   } 
+server {
+   listen 80;
+   server_name 192.168.10.100;
+
+   location / {
+       proxy_pass http://192.168.10.100:3000;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_set_header X-Forwarded-Proto $scheme;
+   }
+}
 ````
+
+7. Press CTRL + S to save the file and CTRL +  to exit nano
+
+8. Run this command to reload nginx:
+````
+sudo systemctl reload nginx
+````
+
+9. Now copy the first ip address from the script and paste it into your browser to check if it worked. You should see the same Sparta App welcoming page as before.
