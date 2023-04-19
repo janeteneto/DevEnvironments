@@ -110,3 +110,42 @@ node app.js
 
 7. Then, grab that ip address the same way as before and check is the app is working!
 
+## MongoDB Provisioning
+
+**Here are the steps to provision the installion of MongoDB on our db virtual machine::
+
+- Make sure to `vagrant destroy db` before doing this.
+
+1. Create a new file named on the same directory called
+````
+provision_db.sh
+````
+
+2. Add the following script to the file:
+````
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927
+echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+sudo systemctl start mongod
+````
+
+3. Then on the terminal on VSCode, do 
+````
+vagrant up db
+````
+
+4. Then, on Bash terminal do
+````
+vagrant ssh
+````
+
+5. Finally, to check it has been done properly run
+````
+sudo systemctl status mongod
+````
+
+And if the script was properly done, MongoDB is active and running.
