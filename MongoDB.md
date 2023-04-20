@@ -1,5 +1,3 @@
-# MongoDB
-
 ## What is MongoDB?
 
 - MongoDB is an open-source document-oriented type of NoSQL database that stores data in a flexible and easy to manage way.
@@ -21,3 +19,13 @@
 (diagram goes here)
 
 ## What is seeding in MongoDB? Why do Mongo databases need to be seeded?
+
+- It's the process of filling a database with fresh data (default data) to create a starting point for an application.
+- The process makes sure that the database instances are all consistent and the application can be safely tested with the data given, which can help identify issues and debugg before launch.
+
+## What port does MongoDB uses?
+
+- By default, MongoDB uses port 27017.
+
+## How do you connect to a Mongo database?
+
