@@ -208,3 +208,61 @@ node seeds/seed.js
  ````
  , and this is what you should see (remember that the info will vary each time you load because it randomly grabs info from the db):
  ![2023-04-20 (1)](https://user-images.githubusercontent.com/129942042/233356211-52aabdec-9445-4026-9210-7867362a54d5.png)
+
+## Provision the new config for the mongod.conf file
+- This basically automates what we did manually on the db vm terminal:
+
+1. First, we need to use the `echo` command, to overwrite the value of `bindIp`. On your `provision_db.sh` file (or however you named it) This is the code we need:
+```
+echo "bindIp: 0.0.0.0" | sudo tee -a /etc/mongod.conf
+````
+- It will change the ip address to 0.0.0.0 so that any ip address can have access to the app.
+
+2. We also need to restart and enable mongod with the new ip address, so add the following code to the file:
+````
+sudo systemctl restart mongod
+sudo systemctl enable mongod
+````
+- This is how the the `provision_db.sh` file should look like then:
+
+![2023-04-20 (3)](https://user-images.githubusercontent.com/129942042/233379516-cb78ae46-51c1-4c26-991e-56b970910d89.png)
+
+## Provision setting of environment and db seeding
+- This part automates what we did on the app vm terminal:
+
+1. I will use the same `echo` command, but his time to add a line to the `.bashrc` file. To do this we also need a `>>` sign to tell the program to add the line to the file. Add this line to your `provision.sh` file:
+````
+echo 'export DB_HOST=mongodb://192.168.10.150:27017/posts' >> ~/.bashrc
+````
+
+2. Add again, add the same `source` command to update and source the env with the new changes:
+````
+source ~/.bashrc
+````
+3. We need to add the other commands we runned mannually as well after we `cd` into app, so the code is as follows:
+````
+cd app
+npm install
+node seeds/seed.js
+node app.js
+pm2 start app.js
+````
+- I added `pm2 start app.js` so that the app can run in the background. At the end your `provision.sh` file should look like this:
+
+![2023-04-20 (4)](https://user-images.githubusercontent.com/129942042/233389365-26c6e516-9682-4d22-8098-b80dc76b5b53.png)
+
+4. The next step is to check if everything is working. For me, the best is to:
+
+ i. assure your files are saved
+ 
+ ii. restart your laptop
+ 
+ iii. vagrant destroy (assure both machines are destroyed on VirtualB)
+ 
+ iv. vagrant up (assure both machines are running on VirtualB)
+ 
+ v. browse the ip `192.168.10.100` to check nginx is installed
+ 
+ vi. browse the ip `192.168.10.100:3000` to check if app is running
+ 
+ vii. browse the ip `192.168.10.100:3000/posts` to check if mongodb is running and post page is available
