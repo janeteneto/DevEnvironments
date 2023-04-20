@@ -149,3 +149,62 @@ sudo systemctl status mongod
 ````
 
 And if the script was properly done, MongoDB shows as active and running.
+
+## Connect DB machine and App machine
+
+1. Open two bash terminals, one for the app VM and another for the db VM
+
+2. Change the user name on the Vagrant file for both VM's from `xenial64` to `bionic64`, it should look like this:
+
+![2023-04-20](https://user-images.githubusercontent.com/129942042/233350962-3844469a-cf0b-4d21-8a92-80f0c3eb4bd4.png)
+
+3. Do `vagrant up` for both VMs on Vscode terminal
+
+4. On one terminal run `vagrant ssh db` and for the other `vagrant ssh app`, so that both machines are connected with Linux
+
+- **On your db vm terminal:**
+
+5. Run `sudo nano /etc/mongod.conf`. This file already exists with the default configs of mongod. We just need to edit the PID inside it, so we open the nano editor.
+
+6. At the bottom of the file, change the pid to `0.0.0.0`. This is so that any IP address can access it.
+
+7. To restart and enable mongod so that it reflects our changes, run:
+````
+sudo systemctl restart mongod
+sudo systemctl enable mongod
+````
+- **Now, on your app vm, we must connect to the correct environment, seed the database, and config the env so that it pulls info from our seeded db:**
+
+8. Run `sudo nano .bashrc` - to open and edit our persist environment
+
+9. At the end, we need to add a line with the following code:
+````
+export DB_HOST=mongod://192.168.10.150:27017/posts
+````
+ - We use the `export` command to create a variable in this environment.
+ - This code basically says that if there is an env w the name `DB_HOST`, read it and try to connect to it on our ip with the mongod port number and go to posts page (pulls info from a random db) which is the collection of database that we want to access.
+
+10. Make sure to CTRL + S to save and CTRL + X to exit.
+
+11. Run `source .bashrc` to update and "source" the environment with new info we added, which is the db_host variable. To check it, you can run `printenv DB_HOST`
+
+12. Now, `cd` into app
+
+13. Run `npm install` to install the Node Package Manager, to run our app
+
+14. To seed the database (put in the post page all the info we need from mongodb db), run:
+````
+node seeds/seed.js
+````
+
+15. Finnaly, we can run the node.js file:
+````
+ node app.js
+ ````
+ 
+ 16. Now, to check everything went as it was supposed to, grab the correct ip address which is
+ ````
+ http://192.168.10.100:3000/posts
+ ````
+ , and this is what you should see (remember that the info will vary each time you load because it randomly grabs info from the db):
+ ![2023-04-20 (1)](https://user-images.githubusercontent.com/129942042/233356211-52aabdec-9445-4026-9210-7867362a54d5.png)
