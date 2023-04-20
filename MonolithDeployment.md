@@ -239,17 +239,15 @@ echo 'export DB_HOST=mongodb://192.168.10.150:27017/posts' >> ~/.bashrc
 ````
 source ~/.bashrc
 ````
-3. We need to add the other commands we runned mannually as well after we `cd` into app, so the code is as follows:
+3. We need to add the other commands we runned mannually as well after we `cd` into app, but this time we can't `cd` into app otherwhise it won't run properly. The best way is to find the path to `app` and add it infront of the command, so the code is as follows:
 ````
-cd app
-npm install
-node seeds/seed.js
-node app.js
-pm2 start app.js
+npm install /home/vagrant/app
+node /home/vagrant/app/seeds/seed.js
+pm2 start /home/vagrant/app/app.js
 ````
 - I added `pm2 start app.js` so that the app can run in the background. At the end your `provision.sh` file should look like this:
 
-![2023-04-20 (4)](https://user-images.githubusercontent.com/129942042/233389365-26c6e516-9682-4d22-8098-b80dc76b5b53.png)
+![2023-04-20 (5)](https://user-images.githubusercontent.com/129942042/233397388-50417133-ae18-4d52-b7a4-4e3cf135d93d.png)
 
 4. The next step is to check if everything is working. For me, the best is to:
 
