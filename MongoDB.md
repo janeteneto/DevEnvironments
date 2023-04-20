@@ -26,6 +26,3 @@
 ## What port does MongoDB uses?
 
 - By default, MongoDB uses port 27017.
-
-## How do you connect to a Mongo database?
-
