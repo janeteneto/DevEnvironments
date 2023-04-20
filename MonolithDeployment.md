@@ -232,22 +232,24 @@ sudo systemctl enable mongod
 
 1. I will use the same `echo` command, but his time to add a line to the `.bashrc` file. To do this we also need a `>>` sign to tell the program to add the line to the file. Add this line to your `provision.sh` file:
 ````
-echo 'export DB_HOST=mongodb://192.168.10.150:27017/posts' >> ~/.bashrc
+echo "export DB_HOST=mongodb://192.168.10.150:27017/posts" >> .bashrc
 ````
 
 2. Add again, add the same `source` command to update and source the env with the new changes:
 ````
-source ~/.bashrc
+source .bashrc
 ````
-3. We need to add the other commands we runned mannually as well after we `cd` into app, but this time we can't `cd` into app otherwhise it won't run properly. The best way is to find the path to `app` and add it infront of the command, so the code is as follows:
+3. We need to add the other commands we runned mannually as well after we `cd` into app, so the code is as follows:
 ````
-npm install /home/vagrant/app
-node /home/vagrant/app/seeds/seed.js
-pm2 start /home/vagrant/app/app.js
+cd app
+npm install
+node seeds/seed.js
+pm2 start app.js
 ````
 - I added `pm2 start app.js` so that the app can run in the background. At the end your `provision.sh` file should look like this:
 
-![2023-04-20 (5)](https://user-images.githubusercontent.com/129942042/233397388-50417133-ae18-4d52-b7a4-4e3cf135d93d.png)
+![2023-04-20 (7)](https://user-images.githubusercontent.com/129942042/233426498-510b2553-dbc6-4ccd-8874-918694b9363c.png)
+
 
 4. The next step is to check if everything is working. For me, the best is to:
 
